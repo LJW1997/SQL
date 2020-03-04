@@ -19,6 +19,9 @@ WHERE
     Candidate.id = winner.Candidateid
 ;
 ```
+# Two ways to select from multipule table: 
+    using where
+    use join
 
 <https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate/>
 
