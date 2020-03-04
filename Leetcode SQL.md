@@ -1,3 +1,32 @@
+*2020-3-2*
+<https://leetcode.com/problems/managers-with-at-least-5-direct-reports/>
+
+```
+SELECT
+    Name
+FROM
+    Employee AS t1 JOIN
+    (SELECT
+        ManagerId
+    FROM
+        Employee
+    GROUP BY ManagerId
+    HAVING COUNT(ManagerId) >= 5) AS t2
+    ON t1.Id = t2.ManagerId
+;
+```
+
+<https://leetcode.com/problems/consecutive-available-seats/>
+
+```
+SELECT C1.seat_id from cinima C1 
+WHERE C1.FREE=1 AND
+(C1.seat_id+1 in (SELECT C1.seat_id from cinima C1 WHERE C1.FREE=1)
+OR
+C1.seat_id+1 in (SELECT C1.seat_id from cinima C1 WHERE C1.FREE=1))
+ORDER BY C1.seat_id 
+```
+
 *2020-2-23*
 
 <https://leetcode.com/problems/consecutive-numbers/>
