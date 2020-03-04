@@ -19,7 +19,7 @@ WHERE
     Candidate.id = winner.Candidateid
 ;
 ```
-# Two ways to select from multipule table: 
+###### Two ways to select from multipule table: 
     using where
     use join
 
