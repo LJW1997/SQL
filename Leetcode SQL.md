@@ -1,6 +1,21 @@
 
 *2020-3-4*
 
+<https://leetcode.com/problems/tree-node/>
+
+```
+SELECT
+    atree.id,
+    IF(ISNULL(atree.p_id),
+        'Root',
+        IF(atree.id IN (SELECT p_id FROM tree), 'Inner','Leaf')) Type
+FROM
+    tree atree
+;
+```
+
+##### Using IF function
+
 <https://leetcode.com/problems/winning-candidate/>
 ```
 SELECT
@@ -19,9 +34,11 @@ WHERE
     Candidate.id = winner.Candidateid
 ;
 ```
-###### Two ways to select from multipule table: 
+###### Takeaways:
+1. Two ways to select from multipule table: 
     using where
     use join
+2. use group by and order by, don't need to select count()
 
 <https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate/>
 
