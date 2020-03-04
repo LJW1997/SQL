@@ -1,3 +1,19 @@
+
+*2020-3-4*
+<https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate/>
+
+```
+select
+round(
+    ifnull(
+    (select count(*) from (select distinct requester_id, accepter_id from request_accepted) as A)
+    /
+    (select count(*) from (select distinct sender_id, send_to_id from friend_request) as B),
+    0)
+, 2) as accept_rate;
+```
+
+
 *2020-3-2*
 <https://leetcode.com/problems/managers-with-at-least-5-direct-reports/>
 
