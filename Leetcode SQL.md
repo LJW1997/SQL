@@ -1,3 +1,24 @@
+*2020-3-9*
+
+<https://leetcode.com/problems/delete-duplicate-emails/>
+
+```
+DELETE p1 FROM Person p1,
+    Person p2
+WHERE
+    p1.Email = p2.Email AND p1.Id > p2.Id
+;
+```
+
+<https://leetcode.com/problems/rank-scores/>
+
+```
+SELECT 
+    score 
+    (SELECT COUNT(distinct score) FROM score WHERE score>=s.score) Rank
+FROM score s
+ORDER BY score DESC
+```
 
 *2020-3-4*
 
@@ -79,7 +100,7 @@ SELECT C1.seat_id from cinima C1
 WHERE C1.FREE=1 AND
 (C1.seat_id+1 in (SELECT C1.seat_id from cinima C1 WHERE C1.FREE=1)
 OR
-C1.seat_id+1 in (SELECT C1.seat_id from cinima C1 WHERE C1.FREE=1))
+C1.seat_id-1 in (SELECT C1.seat_id from cinima C1 WHERE C1.FREE=1))
 ORDER BY C1.seat_id 
 ```
 
