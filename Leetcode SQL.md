@@ -1,3 +1,49 @@
+*2020-3-11*
+
+<https://leetcode.com/problems/investments-in-2016/>
+
+```
+##### solution1
+SELECT
+    SUM(insurance.TIV_2016) AS TIV_2016
+FROM
+    insurance
+WHERE
+    insurance.TIV_2015 IN
+    (
+      SELECT
+        TIV_2015
+      FROM
+        insurance
+      GROUP BY TIV_2015
+      HAVING COUNT(*) > 1
+    )
+    AND CONCAT(LAT, LON) IN
+    (
+      SELECT
+        CONCAT(LAT, LON)
+      FROM
+        insurance
+      GROUP BY LAT , LON
+      HAVING COUNT(*) = 1
+    )
+;
+
+##### solution2
+SELECT
+    SUM(a.TIV_2016) AS TIV_2016
+FROM
+    insurance a
+WHERE
+1=(SELECT COUNT(*) FROM insurance b where a.LAT=b.LAT AND a.LON=b.LON)
+1< (SELECT COUNT(*)FROM insurance c where a.TIV_2015=c.TIV_2015)
+    
+```
+###### Takeaways:
+1. previous do it wrong by using aggregate funtion count(distinct()) in where
+2. can solve this by using (group by + in) or using multiple tables
+
+
 *2020-3-9*
 
 <https://leetcode.com/problems/delete-duplicate-emails/>
