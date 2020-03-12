@@ -1,3 +1,26 @@
+*2020-3-12*
+<https://leetcode.com/problems/biggest-single-number/>
+
+```
+wrong solution: still have all 1,4,5,6,max not effective because of the group by
+SELECT max(num) AS num
+FROM number
+group by num
+having count(num)=1;
+
+right version:
+SELECT
+    MAX(num) AS num
+FROM
+    (SELECT
+        num
+    FROM
+        number
+    GROUP BY num
+    HAVING COUNT(num) = 1) AS t
+;
+```
+
 *2020-3-11*
 
 <https://leetcode.com/problems/investments-in-2016/>
