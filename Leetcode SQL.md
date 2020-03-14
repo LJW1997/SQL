@@ -1,5 +1,6 @@
 *2020-3-13*
 
+##### get running sum for each group
 <https://leetcode.com/problems/game-play-analysis-iii/>
 
 ```
@@ -43,6 +44,31 @@ FROM
     HAVING COUNT(num) = 1) AS t
 ;
 ```
+
+<https://leetcode.com/problems/last-person-to-fit-in-the-elevator/>
+
+```
+Solution: No subquery
+select t1.person_name
+from Queue as t1, Queue as t2
+where t1.turn >= t2.turn
+group by t1.turn
+having sum(t2.weight)<=1000
+order by sum(t2.weight) desc
+limit 1
+
+Solution: subquery with a virtual colum
+select t.person_name
+from (
+    select t1.person_name, sum(t2.weight) as w
+    from Queue as t1, Queue as t2
+    where t1.turn >= t2.turn
+    group by t1.turn
+    having w<=1000) as t
+order by t.w desc
+limit 1
+```
+
 
 *2020-3-11*
 
