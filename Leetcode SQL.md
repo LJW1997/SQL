@@ -1,3 +1,30 @@
+*2020-3-15*
+
+##### Medium: use average to deal with even amount of numbers
+<https://leetcode.com/problems/find-median-given-frequency-of-numbers/>
+<https://leetcode.com/problems/median-employee-salary/>
+
+```
+SELECT id, company, salary 
+FROM Employee e
+WHERE 1>=ABS((SELECT COUNT(*) FROM Employee e1 where e.company = e1.comany AND e.salary >= e1.salary)-(SELECT COUNT(*) FROM Employee e2 where e.company = e2.comany AND e.salary <= e2.salary))
+
+SELECT AVG(a.number) median
+FROM Numbers a
+WHERE a.frequency >= ABS(
+    (SELECT SUM(frequency) FROM Numbers WHERE a.number <= number) - 
+    (SELECT SUM(frequency) FROM Numbers WHERE a.number >= number))
+```
+
+<https://leetcode.com/problems/winning-candidate/>
+
+```
+select Name 
+from Candidate as Name 
+where id =
+(select CandidateId from Vote group by CandidateId order by count(CandidateId) desc limit 1);
+```
+
 *2020-3-13*
 
 ##### get running sum for each group
@@ -9,8 +36,8 @@ SELECT a1.pid, a1.ed,sum(a2.gp) FROM game a1, game a2
 where a1.pid=a2.pid and a1.ed >= a2.ed
 group by a1.pid, a1.ed;
 
-select a1.player_id, a1.event_date, sum(a2.games_played) as games_played_so_far from Activity a1
-inner join Activity a2
+select a1.player_id, a1.event_date, sum(a2.games_played) as games_played_so_far from game a1
+inner join game a2
 on a1.player_id = a2.player_id and a1.event_date >= a2.event_date
 group by a1.player_id, a1.event_date;
 
@@ -215,7 +242,8 @@ FROM
 
 ```
 SELECT C1.seat_id from cinima C1 
-WHERE C1.FREE=1 AND
+WHERE C1.
+E=1 AND
 (C1.seat_id+1 in (SELECT C1.seat_id from cinima C1 WHERE C1.FREE=1)
 OR
 C1.seat_id-1 in (SELECT C1.seat_id from cinima C1 WHERE C1.FREE=1))
