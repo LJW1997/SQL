@@ -184,6 +184,7 @@ WHERE
 ###### Takeaways:
 1. previous do it wrong by using aggregate funtion count(distinct()) in where
 2. can solve this by using (group by + in) or using multiple tables
+3. count(LAT,LON)is not correct, can only do that by count(concat(LAT,LON))
 
 
 *2020-3-9*
