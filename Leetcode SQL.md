@@ -1,3 +1,15 @@
+*2020-3-30*
+
+<https://leetcode.com/accounts/login/?next=/problems/get-highest-answer-rate-question/>
+
+```
+SELECT question_id AS survey_log
+FROM survey_log
+GROUP BY question_id
+ORDER BY SUM(IF(action='answer', 1, 0)) / SUM(IF(action='show', 1, 0)) DESC
+LIMIT 0,1;
+```
+
 *2020-3-19*
 
 ##### How to deal with full out join in mysql: use union all. Notice the difference between Month() and left().
