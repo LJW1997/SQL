@@ -1,3 +1,27 @@
+*2020-4-2*
+
+<https://leetcode.com/problems/customers-who-bought-all-products/>
+
+#####only need to count amount of product key
+```
+SELECT customer_id
+FROM Customer
+GROUP BY customer_id
+HAVING COUNT(DISTINCT product_key) = (
+    SELECT COUNT(DISTINCT product_key) FROM Product
+);
+```
+
+<https://leetcode.com/problems/shortest-distance-in-a-plane/>
+
+```
+SELECT ROUND(
+         SQRT( MIN( POWER(p1.x - p2.x, 2) + POWER(p1.y - p2.y, 2) )
+        ), 2) AS shortest
+FROM point_2d AS p1 INNER JOIN point_2d AS p2
+ON p1.x != p2.x OR p1.y != p2.y --it should be OR here instead of AND
+```
+
 *2020-3-30*
 
 <https://leetcode.com/accounts/login/?next=/problems/get-highest-answer-rate-question/>
@@ -222,6 +246,17 @@ SELECT
 FROM
     tree atree
 ;
+```
+```
+SELECT id,
+        (
+            CASE WHEN p_id IS NULL THEN 'Root'
+                 WHEN id IN (SELECT DISTINCT p_id FROM tree) THEN 'Inner'
+                 ELSE 'Leaf'
+            END
+        ) AS Tpye
+FROM tree
+ORDER BY id;
 ```
 
 ##### Using IF function
