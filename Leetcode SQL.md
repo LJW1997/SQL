@@ -1,5 +1,18 @@
 *2020-12-24*
 
+<https://leetcode-cn.com/problems/exchange-seats/>
+
+```
+SELECT (CASE 
+            WHEN MOD(id,2) = 1 AND id = (SELECT COUNT(*) FROM seat) THEN id
+            WHEN MOD(id,2) = 1 THEN id+1
+            ElSE id-1
+        END) AS id, student
+FROM seat
+ORDER BY id;
+```
+
+
 LeetCode: Find the Start and End Number of Continuous Ranges
 ```
 select min(log_id) as START_ID, max(log_id) as END_ID
