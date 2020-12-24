@@ -23,7 +23,8 @@ group by Teams.team_id
 order by num_points desc, Teams.team_id asc
 ```
 ###### Takeaways:
-use union all to deal with two parties in one table.
+1. use union all to deal with two parties in one table.
+2. left join because some teams don't participate in the match!
 
 *2020-4-2*
 
