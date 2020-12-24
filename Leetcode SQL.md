@@ -1,4 +1,24 @@
 *2020-12-24*
+
+<https://leetcode.com/problems/students-and-examinations/description/>
+
+#### solution1: count with null
+```
+select Students.student_id, student_name, Subjects.subject_name, count(Examinations.student_id) as attended_exams
+from Students join Subjects
+left join Examinations
+on Students.student_id = Examinations.student_id and Subjects.subject_name = Examinations.subject_name
+group by Students.student_id, subject_name
+```
+#### solution2: use isnull
+```
+select Students.student_id, student_name, Subjects.subject_name, sum(if(isnull(Examinations.student_id), 0, 1)) as attended_exams
+from Students join Subjects
+left join Examinations
+on Students.student_id = Examinations.student_id and Subjects.subject_name = Examinations.subject_name
+group by Students.student_id, subject_name
+```
+
 <https://leetcode.com/problems/team-scores-in-football-tournament/>
 ```
 select Teams.team_id, Teams.team_name, sum(if(isnull(num_points), 0, num_points)) as num_points
