@@ -1,3 +1,30 @@
+*2020-12-24*
+<https://leetcode.com/problems/team-scores-in-football-tournament/>
+```
+select Teams.team_id, Teams.team_name, sum(if(isnull(num_points), 0, num_points)) as num_points
+from Teams left join
+    (
+        select host_team as team_id,
+            sum(case when host_goals>guest_goals then 3 
+                     when host_goals=guest_goals then 1
+                     else 0 end) as num_points
+        from Matches
+        group by host_team
+        union all
+        select guest_team as team_id,
+            sum(case when host_goals<guest_goals then 3 
+                     when host_goals=guest_goals then 1
+                     else 0 end) as num_points
+        from Matches
+        group by guest_team
+    ) as tt
+on Teams.team_id = tt.team_id
+group by Teams.team_id
+order by num_points desc, Teams.team_id asc
+```
+###### Takeaways:
+use union all to deal with two parties in one table.
+
 *2020-4-2*
 
 <https://leetcode.com/problems/customers-who-bought-all-products/>
