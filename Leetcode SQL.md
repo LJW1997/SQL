@@ -1,5 +1,20 @@
 *2020-12-24*
 
+LeetCode: Find the Start and End Number of Continuous Ranges
+```
+select min(log_id) as START_ID, max(log_id) as END_ID
+from (select log_id,
+        @rank := case when @prev = log_id-1 then @rank else @rank+1 end as rank,
+        @prev := log_id as prev
+    from Logs,
+       (select @rank:=0, @prev:=-1) as rows) as tt
+group by rank
+order by START_ID
+```
+
+#### takeaways: use group by rank
+
+
 <https://leetcode.com/problems/students-and-examinations/description/>
 
 #### solution1: count with null
