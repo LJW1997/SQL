@@ -1,3 +1,19 @@
+*2021-03-01*
+
+<https://zhuanlan.zhihu.com/p/250023331>
+```
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+ DECLARE p INT;
+ SET p = N - 1;
+ RETURN (
+    SELECT * FROM
+     (SELECT DISTINCT Salary FROM Employee
+      ORDER BY Salary DESC
+      LIMIT 1 OFFSET p
+     ) AS getNthHighestSalary);
+END;
+```
 *2020-12-24*
 
 <https://leetcode-cn.com/problems/exchange-seats/>
