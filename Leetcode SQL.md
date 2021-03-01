@@ -409,11 +409,24 @@ ORDER BY C1.seat_id
 
 <https://leetcode.com/problems/consecutive-numbers/>
 
+###### method1
 ```
 SELECT DISTINCT a.Num AS ConsecutiveNums
 FROM Logs a JOIN Logs b JOIN Logs c ON a.Id = b.Id+1 AND b.Id = c.Id + 1
 WHERE a.Num = b.Num AND b.Num = c.Num;
 ```
+###### method2
+```
+SELECT DISTINCT Num AS ConsecutiveNums FROM (
+SELECT Num, 
+LEAD(Num,1) OVER(ORDER BY id) AS lead1,
+LEAD(Num,2) OVER(ORDER BY id) AS lead2
+FROM Logs
+) AS lg
+WHERE Num = lead1
+AND Num = lead2
+```
+
 
 <https://leetcode.com/problems/department-highest-salary/>
 
