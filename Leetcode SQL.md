@@ -417,6 +417,13 @@ WHERE a.Num = b.Num AND b.Num = c.Num;
 ```
 ###### method2
 ```
+SELECT DISTINCT a.Num AS ConsecutiveNums
+FROM Logs a,Logs b,Logs c 
+WHERE a.Id = b.Id+1 AND b.Id = c.Id + 1 and a.Num = b.Num AND b.Num = c.Num;
+```
+
+###### method3
+```
 SELECT DISTINCT Num AS ConsecutiveNums FROM (
 SELECT Num, 
 LEAD(Num,1) OVER(ORDER BY id) AS lead1,
@@ -426,6 +433,7 @@ FROM Logs
 WHERE Num = lead1
 AND Num = lead2
 ```
+
 
 
 <https://leetcode.com/problems/department-highest-salary/>
